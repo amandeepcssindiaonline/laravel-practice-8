@@ -10,13 +10,18 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(2);
+        $posts = Post::paginate(10);
 
         return view('posts.index', ['posts' => $posts]);
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         Post::create([
             'title' => $request->title,
             'slug' => Str::of($request->title)->slug('-'),
@@ -31,5 +36,15 @@ class PostController extends Controller
         $post->delete();
 
         return back()->with('status', 'Your post deleted successfully');
+    }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', ['post' => $post]);
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', ['post' => $post]);
     }
 }
