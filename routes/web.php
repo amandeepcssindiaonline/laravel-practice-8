@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,5 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 Route::get('/posts/{post}/show', [PostController::class, 'show'])->name('posts.show');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.udpate');
+
+Route::get('/home', [TestController::class, 'index'])->name('home');
